@@ -7,7 +7,7 @@ const tagSlice = createSlice({
   name: "notes",
   initialState,
   reducers: {
-    onAddTag: (state, { payload: { tag } }) => [...state, tag],
+    onAddTag: (state, { payload: tag }) => [...state, tag],
   },
 });
 
