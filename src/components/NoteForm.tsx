@@ -1,5 +1,6 @@
 import CreatableReactSelect from "react-select/creatable";
 import { Link } from "react-router-dom";
+import {useNavigate} from 'react-router'
 import { useRef, useState, FormEvent } from "react";
 import { ITag } from "../interface/ITag";
 import { onCreateNote } from "../store/slices/noteSlice";
@@ -15,6 +16,9 @@ export const NoteForm = () => {
   
   // using dispatch function to call method inside the slice
   const dispatch = useDispatch()
+
+  // using useNavigate hook to navigate to other after the submitting the form
+  const navigate = useNavigate()
 
   // to store the current title and body details inside the ref
   const titleRef = useRef<HTMLInputElement>(null);
@@ -36,6 +40,9 @@ export const NoteForm = () => {
         tags: selectedtags
       })
     )
+
+    // navigating back whereever the user came from
+    navigate('..')
   }
 
   return (
