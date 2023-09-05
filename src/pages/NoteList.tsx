@@ -93,7 +93,8 @@ export const NoteList = ({ notes }: Props) => {
           </div>
         ))}
       </div>
-      <div className="mt-4 flex justify-center space-x-2">
+      {!currentNotes.length && <div className="flex justify-center p-7">No Notes Available</div>}
+      {currentNotes.length > 0 && <div className="mt-4 flex justify-center space-x-2">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
@@ -108,7 +109,7 @@ export const NoteList = ({ notes }: Props) => {
         >
           Next
         </button>
-      </div>
+      </div>}
     </div>
   );
 };

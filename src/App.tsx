@@ -2,14 +2,13 @@ import { BrowserRouter, Navigate } from "react-router-dom";
 import { Route, Routes } from "react-router";
 import { Toaster } from "react-hot-toast";
 import { backGroundImage1, backGroundImage2, backGroundImage3 } from "./assets";
-import { NewNote, NoteList } from "./pages";
+import { EditNote, NewNote, Note, NoteList } from "./pages";
 import { useSelector } from "react-redux";
 import { IStore } from "./interface/IStore";
 import { useMemo } from "react";
 import { ITag } from "./interface/ITag";
 import { IRawNote } from "./interface/IRawNote";
 import { NoteLayout } from "./layout/NoteLayout";
-import { Note } from "./pages/Note";
 
 function App() {
   // taking notes from redux store
@@ -41,7 +40,7 @@ function App() {
           <Route path="/new" element={<NewNote />} />
           <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
             <Route index element={<Note note={notesWithTags}/>} />
-            <Route path="edit" element={<h1>Edit</h1>} />
+            <Route path="edit" element={<EditNote/>} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

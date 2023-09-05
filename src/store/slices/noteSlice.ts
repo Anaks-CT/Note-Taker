@@ -13,8 +13,16 @@ const noteSlice = createSlice({
       ...state,
       { ...data, id: uuidV4(), tagIds: tags.map((tag: ITag) => tag.id) },
     ],
+    onEditNote: (state, { payload: { id, tags, ...data } }) =>
+      state.map((note) => {
+        if (note.id === id) {
+          return { ...note, ...data, tagIds: tags.map((tag: ITag) => tag.id) };
+        } else {
+          return note;
+        }
+      }),
   },
 });
 
-export const { onCreateNote } = noteSlice.actions;
+export const { onCreateNote, onEditNote } = noteSlice.actions;
 export default noteSlice.reducer;
