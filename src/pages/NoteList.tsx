@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { IStore } from "../interface/IStore";
 import { SearchForm } from "../components/SearchForm";
 import { NoteCard } from "../components/NoteCard";
+import { EditTagModal } from "../components/EditTagModal";
 
 type SimplifiedNote = {
   tags: ITag[];
@@ -64,6 +65,15 @@ export const NoteList = ({ notes }: Props) => {
     setCurrentPage(newPage);
   };
 
+
+  // edit tag modal
+
+  const [openModal, setOpenModal] = useState(false)
+
+  const handleCloseModal = () => setOpenModal(false)
+  const handleOpenModal = () => setOpenModal(true)
+  
+
   return (
     <div className="max-w-xl mx-auto p-7 bg-white shadow-md rounded-lg items-center mb-4 w-full">
       <div className="flex items-center justify-between mb-4">
@@ -74,7 +84,9 @@ export const NoteList = ({ notes }: Props) => {
               Create
             </button>
           </Link>
-          <button className="px-4 py-2 bg-white text-gray-600 border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-200">
+          <button className="px-4 py-2 bg-white text-gray-600 border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-200"
+            onClick={handleOpenModal}
+          >
             Edit Tags
           </button>
         </div>
@@ -110,6 +122,7 @@ export const NoteList = ({ notes }: Props) => {
           Next
         </button>
       </div>}
+      <EditTagModal show={openModal} handleClose={handleCloseModal}/>
     </div>
   );
 };
