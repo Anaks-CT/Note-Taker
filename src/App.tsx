@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import { ITag } from "./interface/ITag";
 import { IRawNote } from "./interface/IRawNote";
 import { NoteLayout } from "./layout/NoteLayout";
+import { Note } from "./pages/Note";
 
 function App() {
   // taking notes from redux store
@@ -39,7 +40,7 @@ function App() {
           <Route path="/" element={<NoteList notes={notesWithTags} />} />
           <Route path="/new" element={<NewNote />} />
           <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
-            <Route index element={<h1>Show</h1>} />
+            <Route index element={<Note note={notesWithTags}/>} />
             <Route path="edit" element={<h1>Edit</h1>} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
