@@ -9,6 +9,7 @@ import { onAddTag } from "../store/slices/tagSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { IStore } from "../interface/IStore";
 import { INoteData } from "../interface/INoteData";
+import { toast } from "react-hot-toast";
 
 
 type props = { edit: boolean; id?: string } & Partial<INoteData>; // partial means the other props are optional so only edit form need to send it
@@ -51,6 +52,9 @@ export const NoteForm = ({ edit, id, title = "", markDown="", tags=[] }: props) 
 
     // creating or editing the note according
     edit ? dispatch(update) : dispatch(create);
+
+    // success toast
+    toast.success(`${edit ? 'Note Edited Successfully' : "Note Created Successfully"}`)
 
     // navigating back whereever the user came from
     navigate("..");

@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useNote } from "../hooks/useNote";
 import { Link, useNavigate } from "react-router-dom";
 import { onDeleteNote } from "../store/slices/noteSlice";
+import { toast } from "react-hot-toast";
 
 export const Note = () => {
 
@@ -38,6 +39,7 @@ const navigate = useNavigate()
           <button className="md:px-4 md:py-2 px-2 py-1 bg-white text-red-600 border border-red-400 rounded hover:bg-red-100 focus:outline-none focus:ring focus:ring-red-200"
             onClick={() => {
                 dispatch(onDeleteNote(note.id))
+                toast.success("Note Deleted Successfully")
                 navigate('/')
             }}
           >
