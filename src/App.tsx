@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate } from "react-router-dom";
 import { Route, Routes } from "react-router";
 import { Toaster } from "react-hot-toast";
-import { backGroundImage1, backGroundImage2, backGroundImage3 } from "./assets";
+import { backGroundImage3 } from "./assets";
 import { EditNote, NewNote, Note, NoteList } from "./pages";
 import { useSelector } from "react-redux";
 import { IStore } from "./interface/IStore";
