@@ -39,7 +39,7 @@ function App() {
           <Route path="/" element={<NoteList notes={notesWithTags} />} />
           <Route path="/new" element={<NewNote />} />
           <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
-            <Route index element={<Note note={notesWithTags}/>} />
+            <Route index element={<Note />} />
             <Route path="edit" element={<EditNote/>} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />

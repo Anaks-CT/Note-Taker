@@ -8,7 +8,6 @@ export const Note = () => {
 
 // hook to get the current note in the route
   const note = useNote();
-console.log(note.id)
 const dispatch = useDispatch()
 const navigate = useNavigate()
 

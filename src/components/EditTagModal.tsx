@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../interface/IStore";
 import { onDeleteTag, onEditTag } from "../store/slices/tagSlice";
+import { toast } from "react-hot-toast";
 
 type EditTagsModalProps = {
   show: boolean;
@@ -57,7 +58,7 @@ export const EditTagModal = ({
                   />
                   <button
                     className="flex-shrink-0 p-1 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:outline-none focus:ring w-9"
-                    onClick={() => dispatch(onDeleteTag(tag.id))}
+                    onClick={() => {toast.success("Tag Deleted Successfully"); dispatch(onDeleteTag(tag.id))}}
                   >
                     &times;
                   </button>
