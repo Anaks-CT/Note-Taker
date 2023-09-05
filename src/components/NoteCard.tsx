@@ -11,9 +11,9 @@ export const NoteCard = ({ id, tags, title }: SimplifiedNote) => {
   return (
     <Link
       to={`/${id}`}
-      className="block h-100 text-reset text-decoration-none transition-transform bg-white p-4 shadow-md rounded-lg duration-100 hover:translate-y-[-5px] hover:shadow-md"
+      className="block md:h-56 md:w-40 w-full text-reset text-decoration-none transition-transform bg-white p-4 shadow-md rounded-lg duration-100 hover:translate-y-[-5px] hover:shadow-md"
     >
-      <div className="p-4">
+      <div className="py-2">
         <div className="flex flex-col h-100 items-center justify-center">
           <span className="text-lg">{title}</span>
           {tags && tags.length > 0 && (
