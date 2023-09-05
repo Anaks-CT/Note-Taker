@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../interface/IStore";
+import { onDeleteTag } from "../store/slices/tagSlice";
 
 type EditTagsModalProps = {
   show: boolean;
@@ -13,6 +14,11 @@ export const EditTagModal = ({
 
     // taking all tags from store
     const availableTags = useSelector((state: IStore) => state.tags)
+
+    const dispatch = useDispatch()
+    
+
+
   return (
     <div
       className={`fixed inset-0 ${
@@ -50,6 +56,7 @@ export const EditTagModal = ({
                   />
                   <button
                     className="flex-shrink-0 p-1 border-2 border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:outline-none focus:ring w-9"
+                    onClick={() => dispatch(onDeleteTag(tag.id))}
                   >
                     &times;
                   </button>

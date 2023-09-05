@@ -20,7 +20,6 @@ const noteSlice = createSlice({
           : note
       ),
     onDeleteNote: (state, {payload : id}) => state.filter(note => note.id !== id)
-    
   },
 });
 

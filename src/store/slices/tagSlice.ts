@@ -8,8 +8,10 @@ const tagSlice = createSlice({
   initialState,
   reducers: {
     onAddTag: (state, { payload: tag }) => [...state, tag],
+    onDeleteTag: (state, { payload: id }) =>
+      state.filter((tag) => tag.id !== id),
   },
 });
 
-export const { onAddTag } = tagSlice.actions;
+export const { onAddTag, onDeleteTag } = tagSlice.actions;
 export default tagSlice.reducer;
