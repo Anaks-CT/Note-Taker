@@ -13,13 +13,16 @@ const noteSlice = createSlice({
       ...state,
       { ...data, id: uuidV4(), tagIds: tags.map((tag: ITag) => tag.id) },
     ],
+
     onEditNote: (state, { payload: { id, tags, ...data } }) =>
       state.map((note) =>
         note.id === id
           ? { ...note, ...data, tagIds: tags.map((tag: ITag) => tag.id) }
           : note
       ),
-    onDeleteNote: (state, {payload : id}) => state.filter(note => note.id !== id)
+
+    onDeleteNote: (state, { payload: id }) =>
+      state.filter((note) => note.id !== id),
   },
 });
 

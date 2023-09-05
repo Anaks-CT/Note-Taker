@@ -79,6 +79,7 @@ export const NoteForm = ({ edit, id, title = "", markDown="", tags=[] }: props) 
             type="text"
             id="title"
             name="title"
+            maxLength={15}
             required
             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
             placeholder="Enter a title..."
@@ -94,6 +95,7 @@ export const NoteForm = ({ edit, id, title = "", markDown="", tags=[] }: props) 
 
           {/* all we are doing down below is that we are passing as the value as label and value which the react select expects and when storing the value we store it as a label and id */}
           <CreatableReactSelect
+
             // react select expects a label and a value as like a regular select element do
             value={selectedtags.map((tag) => ({
               label: tag.label,
@@ -107,7 +109,11 @@ export const NoteForm = ({ edit, id, title = "", markDown="", tags=[] }: props) 
             }
             // when new tag is created
             onCreateOption={(label) => {
-              console.log(label);
+              if (label.length > 10) {
+                // Display an error message or take appropriate action
+                toast.error("Tags should have below 10 Characters")
+                return;
+              }
               // creating new tag
               const newTag = { id: uuidV4(), label };
               dispatch(onAddTag(newTag));
