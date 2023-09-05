@@ -1,8 +1,16 @@
+import { useDispatch } from "react-redux";
 import { useNote } from "../hooks/useNote";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { onDeleteNote } from "../store/slices/noteSlice";
 
 export const Note = () => {
+
+// hook to get the current note in the route
   const note = useNote();
+console.log(note.id)
+const dispatch = useDispatch()
+const navigate = useNavigate()
+
   return (
     <div className="max-w-xl md:-w-[700px] mx-auto p-7 w-full bg-white shadow-md rounded-lg">
       <div className="flex items-center justify-between mb-4 ">
@@ -27,7 +35,12 @@ export const Note = () => {
               Edit
             </button>
           </Link>
-          <button className="md:px-4 md:py-2 px-2 py-1 bg-white text-red-600 border border-red-400 rounded hover:bg-red-100 focus:outline-none focus:ring focus:ring-red-200">
+          <button className="md:px-4 md:py-2 px-2 py-1 bg-white text-red-600 border border-red-400 rounded hover:bg-red-100 focus:outline-none focus:ring focus:ring-red-200"
+            onClick={() => {
+                dispatch(onDeleteNote(note.id))
+                navigate('/')
+            }}
+          >
             Delete
           </button>
           <Link to="/">

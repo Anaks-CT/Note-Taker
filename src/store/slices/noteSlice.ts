@@ -14,15 +14,15 @@ const noteSlice = createSlice({
       { ...data, id: uuidV4(), tagIds: tags.map((tag: ITag) => tag.id) },
     ],
     onEditNote: (state, { payload: { id, tags, ...data } }) =>
-      state.map((note) => {
-        if (note.id === id) {
-          return { ...note, ...data, tagIds: tags.map((tag: ITag) => tag.id) };
-        } else {
-          return note;
-        }
-      }),
+      state.map((note) =>
+        note.id === id
+          ? { ...note, ...data, tagIds: tags.map((tag: ITag) => tag.id) }
+          : note
+      ),
+    onDeleteNote: (state, {payload : id}) => state.filter(note => note.id !== id)
+    
   },
 });
 
-export const { onCreateNote, onEditNote } = noteSlice.actions;
+export const { onCreateNote, onEditNote, onDeleteNote } = noteSlice.actions;
 export default noteSlice.reducer;
