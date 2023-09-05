@@ -1,9 +1,9 @@
-import { INote } from "./INote";
+import { IRawNote } from "./IRawNote";
 import { ITag } from "./ITag";
 
 
 
 export interface IStore {
-    notes: INote[]
+    notes: IRawNote[]
     tags: ITag[]
 }
