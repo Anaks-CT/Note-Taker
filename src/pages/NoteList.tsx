@@ -24,12 +24,12 @@ export const NoteList = ({ notes }: Props) => {
   // state to show all the tags created in the store
   const availableTags = useSelector((state: IStore) => state.tags) as ITag[];
 
-   // state for selected tags when searching
+  // state for selected tags when searching
   const [selectedTags, setSelectedTags] = useState<ITag[]>([]);
 
   // Number of notes per page
-  const pageSize = 3; 
-  // current page 
+  const pageSize = 3;
+  // current page
   const [currentPage, setCurrentPage] = useState(1);
 
   // function to filter the notes when searched by the user
@@ -37,18 +37,18 @@ export const NoteList = ({ notes }: Props) => {
     () =>
       notes.filter(
         (note) =>
-        // filter the notes if the title entered is "" which means all the notes
+          // filter the notes if the title entered is "" which means all the notes
           (title === "" ||
-          // filter the notes if according to what the current entered title is by the user
+            // filter the notes if according to what the current entered title is by the user
             note.title.toLowerCase().includes(title.toLowerCase())) &&
-             // filter the notes if there are no selected tags by the user which means all the the notes
+          // filter the notes if there are no selected tags by the user which means all the the notes
           (selectedTags.length === 0 ||
-            // here we take all the selected tags and check the notes which contain all that selected tags and filter the notes 
+            // here we take all the selected tags and check the notes which contain all that selected tags and filter the notes
             selectedTags.every((tag) =>
               note.tags.some((noteTag) => noteTag.id === tag.id)
             ))
       ),
-      // we fetch the filtered notes if anyone of the attribute changes here for memoization
+    // we fetch the filtered notes if anyone of the attribute changes here for memoization
     [title, selectedTags, notes]
   );
 
@@ -65,14 +65,13 @@ export const NoteList = ({ notes }: Props) => {
     setCurrentPage(newPage);
   };
 
-
   // edit tag modal
 
-  const [openModal, setOpenModal] = useState(false)
-
-  const handleCloseModal = () => setOpenModal(false)
-  const handleOpenModal = () => setOpenModal(true)
-  
+  const [openModal, setOpenModal] = useState(false);
+  // close modal function
+  const handleCloseModal = () => setOpenModal(false);
+  // open modal function
+  const handleOpenModal = () => setOpenModal(true);
 
   return (
     <div className="max-w-xl mx-auto p-7 bg-white shadow-md rounded-lg items-center mb-4 w-full">
@@ -84,7 +83,8 @@ export const NoteList = ({ notes }: Props) => {
               Create
             </button>
           </Link>
-          <button className="px-4 py-2 bg-white text-gray-600 border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-200"
+          <button
+            className="px-4 py-2 bg-white text-gray-600 border border-gray-300 rounded hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-200"
             onClick={handleOpenModal}
           >
             Edit Tags
@@ -105,24 +105,32 @@ export const NoteList = ({ notes }: Props) => {
           </div>
         ))}
       </div>
-      {!currentNotes.length && <div className="flex justify-center p-7">No Notes Available</div>}
-      {currentNotes.length > 0 && <div className="mt-4 flex justify-center space-x-2">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className={`${currentPage === 1 && "hidden"} px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200`}
-        >
-          Previous
-        </button>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className={`${currentPage === totalPages && "hidden"} px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200`}
-        >
-          Next
-        </button>
-      </div>}
-      <EditTagModal show={openModal} handleClose={handleCloseModal}/>
+      {!currentNotes.length && (
+        <div className="flex justify-center p-7">No Notes Available</div>
+      )}
+      {currentNotes.length > 0 && (
+        <div className="mt-4 flex justify-center space-x-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`${
+              currentPage === 1 && "hidden"
+            } px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200`}
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`${
+              currentPage === totalPages && "hidden"
+            } px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200`}
+          >
+            Next
+          </button>
+        </div>
+      )}
+      <EditTagModal show={openModal} handleClose={handleCloseModal} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../interface/IStore";
-import { onDeleteTag } from "../store/slices/tagSlice";
+import { onDeleteTag, onEditTag } from "../store/slices/tagSlice";
 
 type EditTagsModalProps = {
   show: boolean;
@@ -52,6 +52,7 @@ export const EditTagModal = ({
                   <input
                     type="text"
                     value={tag.label}
+                    onChange={(e) => dispatch(onEditTag({id: tag.id, label: e.target.value}))}
                     className="flex-grow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring"
                   />
                   <button
@@ -62,12 +63,13 @@ export const EditTagModal = ({
                   </button>
                 </div>
               ))}
+              {!availableTags.length && <div className="flex justify-center">No Available Tags</div>}
             </form>
           </div>
           <div className="bg-white px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               onClick={handleClose}
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-300 text-base font-medium text-gray-700 hover:bg-gray-400 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-300 text-base font-medium hover:bg-gray-400 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm text-red-500"
             >
               Close
             </button>
